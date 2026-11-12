@@ -4,12 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>YouTube Downloader</title>
-    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
   </head>
   <body>
     <main>
+      <div class="brand-mark" aria-hidden="true">YD</div>
+      <p class="eyebrow">MEDIA WORKSPACE</p>
       <h1>YouTube Downloader</h1>
-      <p>Paste a YouTube video URL and download an MP4 or MP3 to your device.</p>
+      <p class="intro">Save videos and audio for offline access in just a few seconds.</p>
       <form id="download-form" action="/download" method="post">
         <input id="url" name="url" type="url" placeholder="https://www.youtube.com/watch?v=..." required maxlength="2048" autocomplete="off">
         <select id="format" name="format" aria-label="Download format">
