@@ -8,10 +8,12 @@
   </head>
   <body>
     <main>
-      <div class="brand-mark" aria-hidden="true">YD</div>
-      <p class="eyebrow">MEDIA WORKSPACE</p>
-      <h1>YouTube Downloader</h1>
-      <p class="intro">Save videos and audio for offline access in just a few seconds.</p>
+      <div class="window-bar"><span>YouTube Downloader</span><span class="window-buttons" aria-hidden="true">_ [] X</span></div>
+      <div class="page-content">
+        <div class="brand-mark" aria-hidden="true">YD</div>
+        <p class="eyebrow">:: MEDIA DOWNLOAD CENTER ::</p>
+        <h1>YouTube Downloader</h1>
+        <p class="intro">Save videos and audio for offline access in just a few seconds.</p>
       <form id="download-form" action="/download" method="post">
         <input id="url" name="url" type="url" placeholder="https://www.youtube.com/watch?v=..." required maxlength="2048" autocomplete="off">
         <select id="format" name="format" aria-label="Download format">
@@ -30,6 +32,7 @@
         </div>
         <small id="progress-help">The download will begin automatically when it is ready.</small>
       </section>
+      </div>
     </main>
     <script src="/js/app.js" defer></script>
   </body>
