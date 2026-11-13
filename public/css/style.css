@@ -19,18 +19,73 @@
 * { box-sizing: border-box; }
 
 body {
+  position: relative;
   margin: 0;
   min-height: 100vh;
   display: grid;
   place-items: center;
   padding: 24px;
-  background-color: var(--page-bg);
-  background-image: radial-gradient(var(--page-lines) 1px, transparent 1px);
-  background-size: 4px 4px;
+  background: var(--page-bg);
   color: var(--text);
 }
 
+.desktop-icons {
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 78px;
+}
+
+.desktop-icon {
+  color: white;
+  font: 11px Tahoma, "MS Sans Serif", Arial, sans-serif;
+  text-align: center;
+  text-shadow: 1px 1px #000;
+}
+
+.desktop-icon span { display: block; margin-top: 4px; }
+
+.desktop-glyph {
+  position: relative;
+  width: 32px;
+  height: 27px;
+  margin: 0 auto;
+}
+
+.folder-glyph {
+  margin-top: 5px;
+  border: 1px solid #765600;
+  background: #f4c542;
+  box-shadow: inset 1px 1px #fff1a8, 1px 1px #164a4a;
+}
+
+.folder-glyph::before {
+  position: absolute;
+  top: -5px;
+  left: 2px;
+  width: 13px;
+  height: 6px;
+  border: 1px solid #765600;
+  border-bottom: 0;
+  background: #f4c542;
+  content: "";
+}
+
+.recycle-glyph {
+  color: white;
+  font-family: Arial, sans-serif;
+  font-size: 27px;
+  line-height: 27px;
+  text-shadow: 1px 1px #555;
+}
+
 main {
+  position: relative;
+  z-index: 1;
   width: min(100%, 640px);
   border: 2px solid;
   border-color: #fff #404040 #404040 #fff;
