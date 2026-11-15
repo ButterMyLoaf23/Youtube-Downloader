@@ -1,61 +1,23 @@
-const form = document.querySelector('#download-form');
-const button = document.querySelector('#download-button');
-const status = document.querySelector('#status');
-const progressPanel = document.querySelector('#progress-panel');
-const progressHelp = document.querySelector('#progress-help');
-const format = document.querySelector('#format');
-const windowBar = document.querySelector('.window-bar');
-const windowPanel = document.querySelector('main');
+(function () {
+  const desktop = document.querySelector('#desktop');
+  const manager = new WindowManager(desktop, document.querySelector('#running-apps'), document.querySelector('#recycle-bin'));
+  manager.register(document.querySelector('#downloader-window'), { title: 'YouTube Downloader', defaultPosition: { left: 180, top: 85 }, defaultSize: { width: 640, height: 390 } });
 
-let dragState = null;
+  document.querySelectorAll('[data-open-window]').forEach((icon) => {
+    let clickTimer;
+    icon.addEventListener('click', () => { clearTimeout(clickTimer); clickTimer = setTimeout(() => icon.classList.add('selected'), 220); });
+    icon.addEventListener('dblclick', () => { clearTimeout(clickTimer); icon.classList.add('selected'); manager.open(icon.dataset.openWindow); });
+  });
 
-windowBar.addEventListener('pointerdown', (event) => {
-  const bounds = windowPanel.getBoundingClientRect();
+  document.querySelectorAll('[data-external-url]').forEach((shortcut) => shortcut.addEventListener('dblclick', () => window.open(shortcut.dataset.externalUrl, '_blank', 'noopener')));
+  document.querySelector('#start-button').addEventListener('click', () => document.querySelector('#start-button').classList.toggle('active'));
 
-  // Convert the initially centered panel into a freely positioned window.
-  windowPanel.style.position = 'fixed';
-  windowPanel.style.left = `${bounds.left}px`;
-  windowPanel.style.top = `${bounds.top}px`;
-  windowPanel.style.margin = '0';
-  windowPanel.style.zIndex = '10';
+  const clock = document.querySelector('#clock');
+  function updateClock() { const now = new Date(); clock.textContent = now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }); clock.dateTime = now.toISOString(); }
+  updateClock(); setInterval(updateClock, 30000);
 
-  dragState = {
-    offsetX: event.clientX - bounds.left,
-    offsetY: event.clientY - bounds.top
-  };
-  windowBar.setPointerCapture(event.pointerId);
-});
+  const form = document.querySelector('#download-form'); const button = document.querySelector('#download-button'); const status = document.querySelector('#status'); const progressPanel = document.querySelector('#progress-panel'); const progressHelp = document.querySelector('#progress-help'); const format = document.querySelector('#format');
+  format.addEventListener('change', () => { button.textContent = `Download ${format.value.toUpperCase()}`; });
+  form.addEventListener('submit', () => { button.disabled = true; button.textContent = `Preparing ${format.value.toUpperCase()}...`; progressPanel.hidden = false; status.textContent = 'Your download is being prepared...'; progressHelp.textContent = 'If other downloads are ahead of yours, you are in the queue.'; });
 
-windowBar.addEventListener('pointermove', (event) => {
-  if (!dragState) return;
-
-  const maxLeft = Math.max(0, window.innerWidth - windowPanel.offsetWidth);
-  const maxTop = Math.max(0, window.innerHeight - windowPanel.offsetHeight);
-  const left = Math.min(Math.max(0, event.clientX - dragState.offsetX), maxLeft);
-  const top = Math.min(Math.max(0, event.clientY - dragState.offsetY), maxTop);
-
-  windowPanel.style.left = `${left}px`;
-  windowPanel.style.top = `${top}px`;
-});
-
-function stopDragging(event) {
-  dragState = null;
-  if (event && windowBar.hasPointerCapture(event.pointerId)) {
-    windowBar.releasePointerCapture(event.pointerId);
-  }
-}
-
-windowBar.addEventListener('pointerup', stopDragging);
-windowBar.addEventListener('pointercancel', stopDragging);
-
-format.addEventListener('change', () => {
-  button.textContent = `Download ${format.value.toUpperCase()}`;
-});
-
-form.addEventListener('submit', () => {
-  button.disabled = true;
-  button.textContent = `Preparing ${format.value.toUpperCase()}...`;
-  progressPanel.hidden = false;
-  status.textContent = 'Your download is being prepared...';
-  progressHelp.textContent = 'If other downloads are ahead of yours, you are in the queue.';
-});
+}());

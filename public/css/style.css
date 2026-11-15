@@ -1,140 +1,50 @@
-:root {
-  color-scheme: light dark;
-  font-family: Tahoma, "MS Sans Serif", Arial, sans-serif;
-  --page-bg: #008080;
-  --page-lines: #168989;
-  --panel-bg: #c0c0c0;
-  --panel-border: #000;
-  --bar-start: #000080;
-  --bar-end: #000080;
-  --text: #000;
-  --muted: #333;
-  --field-bg: #fff;
-  --field-border: #808080;
-  --button-top: #c0c0c0;
-  --button-bottom: #c0c0c0;
-  --progress-bg: #c0c0c0;
-}
-
+:root { font-family: Tahoma, "MS Sans Serif", Arial, sans-serif; color: #000; }
 * { box-sizing: border-box; }
+body { margin: 0; overflow: hidden; }
+button, input, select { font: inherit; }
+.desktop { position: relative; width: 100vw; height: 100vh; overflow: hidden; background: #008080; }
+.desktop-icons { position: absolute; top: 14px; left: 12px; z-index: 2; display: flex; flex-direction: column; gap: 16px; width: 92px; }
+.desktop-icon { width: 92px; padding: 3px; border: 1px solid transparent; background: transparent; color: #fff; cursor: default; font-size: 11px; text-align: center; text-shadow: 1px 1px #000; }
+.desktop-icon:hover, .desktop-icon.selected { border-color: #b8ffff; background: #008080aa; }
+.desktop-icon img { display: block; width: 48px; height: 48px; margin: 0 auto 3px; object-fit: contain; image-rendering: pixelated; }
+.desktop-icon span { display: block; line-height: 14px; }
 
-body {
-  position: relative;
-  margin: 0;
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: 24px;
-  background: var(--page-bg);
-  color: var(--text);
-}
-
-.desktop-icons {
-  position: fixed;
-  top: 18px;
-  left: 18px;
-  z-index: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 78px;
-}
-
-.desktop-icon {
-  color: white;
-  font: 11px Tahoma, "MS Sans Serif", Arial, sans-serif;
-  text-align: center;
-  text-shadow: 1px 1px #000;
-}
-
-.desktop-icon span { display: block; margin-top: 4px; }
-
-.desktop-glyph {
-  position: relative;
-  width: 32px;
-  height: 27px;
-  margin: 0 auto;
-}
-
-.folder-glyph {
-  margin-top: 5px;
-  border: 1px solid #765600;
-  background: #f4c542;
-  box-shadow: inset 1px 1px #fff1a8, 1px 1px #164a4a;
-}
-
-.folder-glyph::before {
-  position: absolute;
-  top: -5px;
-  left: 2px;
-  width: 13px;
-  height: 6px;
-  border: 1px solid #765600;
-  border-bottom: 0;
-  background: #f4c542;
-  content: "";
-}
-
-.recycle-glyph {
-  color: white;
-  font-family: Arial, sans-serif;
-  font-size: 27px;
-  line-height: 27px;
-  text-shadow: 1px 1px #555;
-}
-
-main {
-  position: relative;
-  z-index: 1;
-  width: min(100%, 640px);
-  border: 2px solid;
-  border-color: #fff #404040 #404040 #fff;
-  background: var(--panel-bg);
-  box-shadow: 1px 1px 0 #000;
-}
-
-.window-bar {
-  display: flex;
-  justify-content: space-between;
-  padding: 3px 4px;
-  background: var(--bar-start);
-  color: white;
-  font-size: 12px;
-  font-weight: bold;
-  cursor: move;
-  user-select: none;
-}
-
-.window-controls { letter-spacing: 2px; font-family: Arial, sans-serif; }
-
-.window-bar:active { cursor: grabbing; }
-
-.page-content { padding: 28px; }
-h1 { margin: 0; color: #000; font-size: 24px; font-weight: bold; }
-.intro { margin: 10px 0 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
-
+.app-window { position: absolute; z-index: 20; min-width: 320px; min-height: 260px; border: 2px solid; border-color: #fff #404040 #404040 #fff; background: #c0c0c0; box-shadow: 1px 1px #000; }
+.window-titlebar { display: flex; align-items: center; justify-content: space-between; height: 24px; padding: 2px 3px 2px 5px; background: #000080; color: #fff; font-size: 12px; font-weight: bold; cursor: move; user-select: none; }
+.window-controls { display: flex; gap: 2px; }
+.window-controls button { width: 18px; height: 18px; padding: 0; border: 2px outset #fff; background: #c0c0c0; color: #000; font: bold 12px Arial, sans-serif; line-height: 12px; cursor: pointer; }
+.window-controls button:active { border-style: inset; }
+.window-content { height: calc(100% - 24px); overflow: auto; padding: 24px; }
+h1 { margin: 0; font-size: 24px; font-weight: bold; }
+.intro { margin: 10px 0 0; color: #333; font-size: 14px; line-height: 1.5; }
 form { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 6px; margin-top: 24px; }
-input, select { min-width: 0; padding: 5px; border: 2px inset #dbe8f3; border-right-color: var(--field-border); border-bottom-color: var(--field-border); border-radius: 0; background: var(--field-bg); color: var(--text); font: 12px Tahoma, Arial, sans-serif; }
+input, select { min-width: 0; padding: 5px; border: 2px inset #fff; border-radius: 0; background: #fff; color: #000; font-size: 12px; }
 input:focus, select:focus { outline: 1px dotted #d36e00; outline-offset: 1px; }
-button { min-width: 88px; padding: 5px 9px; border: 2px outset #fff; border-radius: 0; background: var(--button-top); color: #000; font: 12px Tahoma, Arial, sans-serif; cursor: pointer; transition: filter .15s, transform .15s; }
-button:hover { filter: brightness(1.08); transform: translateY(-1px); }
-button:active { border-style: inset; transform: translateY(1px); }
-button:disabled { cursor: wait; opacity: .7; transform: none; }
-
-.progress-panel { margin-top: 20px; padding: 10px; border: 2px inset #fff; background: var(--progress-bg); }
-.progress-heading { display: flex; justify-content: space-between; gap: 12px; color: var(--text); font-size: 13px; font-weight: bold; }
+button { border: 2px outset #fff; border-radius: 0; background: #c0c0c0; color: #000; cursor: pointer; }
+button:active { border-style: inset; }
+.window-content form button { min-width: 88px; padding: 5px 9px; font-size: 12px; }
+.window-content form button:hover, .taskbar button:hover { filter: brightness(1.08); }
+.progress-panel { margin-top: 20px; padding: 10px; border: 2px inset #fff; background: #c0c0c0; }
+.progress-heading { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; font-weight: bold; }
 .progress-track { position: relative; height: 14px; margin: 9px 0 6px; overflow: hidden; border: 2px inset #fff; background: #fff; }
 .progress-bar { position: absolute; width: 35%; height: 100%; background: repeating-linear-gradient(90deg, #000080 0 12px, #0000a0 12px 15px); animation: progress-slide 1.2s linear infinite; }
 .pulse-dot { width: 8px; height: 8px; flex: 0 0 auto; border-radius: 50%; background: #e19a00; animation: pulse 1.3s infinite; }
-.progress-panel small { margin-top: 0; }
-
+.progress-panel small { margin-top: 0; font-size: 11px; }
 @keyframes progress-slide { from { transform: translateX(-115%); } to { transform: translateX(320%); } }
 @keyframes pulse { 50% { opacity: .35; } }
 
-@media (prefers-color-scheme: dark) {
-  :root { --page-bg: #183838; --page-lines: #245050; --panel-bg: #808080; --text: #000; --muted: #111; --field-bg: #c0c0c0; --progress-bg: #808080; }
-}
+.taskbar { position: absolute; right: 0; bottom: 0; left: 0; z-index: 100; display: flex; align-items: center; gap: 4px; height: 34px; padding: 3px; border-top: 2px solid #fff; background: #c0c0c0; }
+.taskbar button { height: 27px; padding: 2px 7px; font-size: 12px; font-weight: bold; }
+.start-button { min-width: 72px; }
+.windows-logo { font-size: 17px; vertical-align: -1px; }
+.taskbar-shortcut { width: 32px; padding: 1px !important; }
+.taskbar-shortcut img { width: 22px; height: 22px; object-fit: contain; image-rendering: pixelated; vertical-align: middle; }
+.running-apps { display: flex; flex: 1; gap: 4px; overflow: hidden; }
+.taskbar-app { width: 180px; overflow: hidden; text-align: left; text-overflow: ellipsis; white-space: nowrap; }
+.taskbar-app.active, .start-button.active { border-style: inset; }
+.clock { min-width: 72px; padding: 5px 8px; border: 2px inset #fff; font-size: 12px; text-align: center; }
+.drop-target { outline: 2px dotted #fff; outline-offset: 2px; background: #008080aa; }
 
-@media (max-width: 680px) { form { grid-template-columns: 1fr 1fr; } input { grid-column: 1 / -1; } }
-@media (max-width: 420px) { form { grid-template-columns: 1fr; } input { grid-column: auto; } select, button { width: 100%; } .page-content { padding: 20px; } }
+@media (max-width: 680px) { form { grid-template-columns: 1fr 1fr; } input { grid-column: 1 / -1; } .window-content { padding: 16px; } }
+@media (max-width: 420px) { form { grid-template-columns: 1fr; } input { grid-column: auto; } select, .window-content form button { width: 100%; } .taskbar-app { width: 120px; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }

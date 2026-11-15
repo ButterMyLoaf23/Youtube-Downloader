@@ -3,49 +3,50 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>YouTube Downloader</title>
+    <title>Windows 95 Desktop</title>
     <link rel="stylesheet" href="/css/style.css">
   </head>
   <body>
-    <div class="desktop-icons" aria-hidden="true">
-      <div class="desktop-icon">
-        <div class="desktop-glyph folder-glyph"></div>
-        <span>My Documents</span>
+    <div id="desktop" class="desktop">
+      <div class="desktop-icons" aria-label="Desktop icons">
+        <button class="desktop-icon" type="button" data-open-window="downloader-window"><img src="/images/folder.png" alt=""><span>YouTube Downloader</span></button>
+        <button class="desktop-icon" type="button" data-external-url="https://www.youtube.com"><img src="/images/youtube.png" alt=""><span>YouTube</span></button>
+        <button id="recycle-bin" class="desktop-icon" type="button" aria-label="Recycle Bin drop target"><img src="/images/recycle-bin.png" alt=""><span>Recycle Bin</span></button>
       </div>
-      <div class="desktop-icon">
-        <div class="desktop-glyph folder-glyph"></div>
-        <span>Downloads</span>
-      </div>
-      <div class="desktop-icon">
-        <div class="desktop-glyph recycle-glyph">♻</div>
-        <span>Recycle Bin</span>
-      </div>
-    </div>
-    <main>
-      <div class="window-bar"><span>YouTube Downloader</span><span class="window-controls" aria-hidden="true">_ [] X</span></div>
-      <div class="page-content">
-        <h1>YouTube Downloader</h1>
-        <p class="intro">Enter a YouTube URL, choose a format, and save the file to your computer.</p>
-      <form id="download-form" action="/download" method="post">
-        <input id="url" name="url" type="url" placeholder="https://www.youtube.com/watch?v=..." required maxlength="2048" autocomplete="off">
-        <select id="format" name="format" aria-label="Download format">
-          <option value="mp4">MP4 video</option>
-          <option value="mp3">MP3 audio</option>
-        </select>
-        <button id="download-button" type="submit">Download MP4</button>
-      </form>
-      <section id="progress-panel" class="progress-panel" hidden aria-live="polite">
-        <div class="progress-heading">
-          <span id="status">Preparing your download...</span>
-          <span class="pulse-dot" aria-hidden="true"></span>
+
+      <section id="downloader-window" class="app-window" aria-labelledby="downloader-title" hidden>
+        <div class="window-titlebar" data-window-drag-handle>
+          <span id="downloader-title">YouTube Downloader</span>
+          <div class="window-controls">
+            <button type="button" title="Minimize" data-window-action="minimize">_</button>
+            <button type="button" title="Maximize" data-window-action="maximize">□</button>
+            <button type="button" title="Close" data-window-action="close">×</button>
+          </div>
         </div>
-        <div class="progress-track" role="progressbar" aria-label="Download in progress">
-          <div class="progress-bar"></div>
+        <div class="window-content">
+          <h1>YouTube Downloader</h1>
+          <p class="intro">Enter a YouTube URL, choose a format, and save the file to your computer.</p>
+          <form id="download-form" action="/download" method="post">
+            <input id="url" name="url" type="url" placeholder="https://www.youtube.com/watch?v=..." required maxlength="2048" autocomplete="off">
+            <select id="format" name="format" aria-label="Download format"><option value="mp4">MP4 video</option><option value="mp3">MP3 audio</option></select>
+            <button id="download-button" type="submit">Download MP4</button>
+          </form>
+          <section id="progress-panel" class="progress-panel" hidden aria-live="polite">
+            <div class="progress-heading"><span id="status">Preparing your download...</span><span class="pulse-dot" aria-hidden="true"></span></div>
+            <div class="progress-track" role="progressbar" aria-label="Download in progress"><div class="progress-bar"></div></div>
+            <small id="progress-help">The download will begin automatically when it is ready.</small>
+          </section>
         </div>
-        <small id="progress-help">The download will begin automatically when it is ready.</small>
       </section>
-      </div>
-    </main>
-    <script src="/js/app.js" defer></script>
+
+      <footer class="taskbar">
+        <button id="start-button" class="start-button" type="button"><span class="windows-logo">▦</span> Start</button>
+        <button class="taskbar-shortcut" type="button" data-external-url="https://www.google.com" title="Open Google with Internet Explorer"><img src="/images/internet-explorer.png" alt="Internet Explorer"></button>
+        <div id="running-apps" class="running-apps"></div>
+        <time id="clock" class="clock"></time>
+      </footer>
+    </div>
+    <script src="/js/windowManager.js"></script>
+    <script src="/js/app.js"></script>
   </body>
 </html>
