@@ -17,6 +17,22 @@ npm start
 
 Open http://localhost:3000.
 
+## Deploy to Render
+
+This repository includes a `Dockerfile` that installs Node.js, Python, `yt-dlp`, and FFmpeg together. To deploy it:
+
+1. Push the project to GitHub.
+2. In Render, choose **New > Web Service** and connect the GitHub repository.
+3. Choose **Docker** as the runtime. Render will detect the root `Dockerfile`.
+4. Select the **Free** plan and create the service.
+5. After the deploy finishes, open the generated `onrender.com` URL.
+
+The included `render.yaml` can also be used as a Blueprint. The service uses one download at a time by default. Render's free services can sleep after inactivity and have ephemeral storage, which is acceptable here because downloads are temporary and deleted after each response.
+
+## Hosting notes
+
+GitHub Pages and Live Server can display the Windows 95 desktop, icons, animations, and window controls because those are static frontend files. They cannot run the Express server, Python, `yt-dlp`, or FFmpeg, so the download form itself requires the Express app to be running on a backend host. The frontend uses relative asset paths so it also works when GitHub Pages serves the project under a repository subpath.
+
 On macOS/Linux, or if `yt-dlp` is already on PATH, set `YTDLP_COMMAND=yt-dlp`. On Windows the default command is `py -m yt_dlp`.
 
 Downloads are handled by an in-memory queue. The default concurrency is one download at a time, with up to ten additional requests waiting. Change the active concurrency with `DOWNLOAD_CONCURRENCY` if needed.

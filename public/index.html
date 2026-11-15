@@ -4,14 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Windows 95 Desktop</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
     <div id="desktop" class="desktop">
       <div class="desktop-icons" aria-label="Desktop icons">
-        <button class="desktop-icon" type="button" data-open-window="downloader-window"><img src="/images/folder.png" alt=""><span>YouTube Downloader</span></button>
-        <button class="desktop-icon" type="button" data-external-url="https://www.youtube.com"><img src="/images/youtube.png" alt=""><span>YouTube</span></button>
-        <button id="recycle-bin" class="desktop-icon" type="button" aria-label="Recycle Bin drop target"><img src="/images/recycle-bin.png" alt=""><span>Recycle Bin</span></button>
+        <button class="desktop-icon" type="button" data-open-window="downloader-window"><img src="images/folder.png" alt=""><span>YouTube Downloader</span></button>
+        <button class="desktop-icon" type="button" data-external-url="https://www.youtube.com"><img src="images/youtube.png" alt=""><span>YouTube</span></button>
+        <button id="recycle-bin" class="desktop-icon" type="button" aria-label="Recycle Bin drop target"><img src="images/recycle-bin.png" alt=""><span>Recycle Bin</span></button>
       </div>
 
       <section id="downloader-window" class="app-window" aria-labelledby="downloader-title" hidden>
@@ -41,12 +41,12 @@
 
       <footer class="taskbar">
         <button id="start-button" class="start-button" type="button"><span class="windows-logo">▦</span> Start</button>
-        <button class="taskbar-shortcut" type="button" data-external-url="https://www.google.com" title="Open Google with Internet Explorer"><img src="/images/internet-explorer.png" alt="Internet Explorer"></button>
+        <button class="taskbar-shortcut" type="button" data-external-url="https://www.google.com" title="Open Google with Internet Explorer"><img src="images/internet-explorer.png" alt="Internet Explorer"></button>
         <div id="running-apps" class="running-apps"></div>
         <time id="clock" class="clock"></time>
       </footer>
     </div>
-    <script src="/js/windowManager.js"></script>
-    <script src="/js/app.js"></script>
+    <script src="js/windowManager.js"></script>
+    <script src="js/app.js"></script>
   </body>
 </html>

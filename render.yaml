@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: youtube-downloader
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /
+    envVars:
+      - key: DOWNLOAD_CONCURRENCY
+        value: "1"
