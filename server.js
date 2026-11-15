@@ -40,7 +40,7 @@ function runYtDlp(url, outputDir, format) {
       ? ['-m', 'yt_dlp']
       : [];
 
-    args.push('--no-playlist', '--no-progress', '--restrict-filenames');
+    args.push('--no-playlist', '--no-progress', '--restrict-filenames', '--js-runtimes', 'node');
 
     if (format === 'mp3') {
       args.push(
